@@ -1,18 +1,17 @@
-import fetch from 'node-fetch';
+//import fetch from 'node-fetch';
+import axios from 'axios';
 
+//https://apihospital00.herokuapp.com/api/hotel?name=all
+//https://api.github.com/users/defunkt
 export function GetDataFilter(){
     return(dispatch) => {
-        return fetch('http://localhost:3000/api/hotel?name=mohamed',{
-            method: "GET", // *GET, POST, PUT, DELETE, etc.
-            mode: "cors", // no-cors, cors, *same-origin
-            headers: {                
-                "Access-Control-Allow-Origin": "*"
-            }
+        return axios.get('https://apihospital00.herokuapp.com/api/hotel?name=all')
+        .then((response) => {
+            console.log(response.data);
+          dispatch(ActionDataFilter(response.data)); 
         })
-        .then(res => res.json())
-        .then((result) =>{
-            console.log(result);
-            dispatch(ActionDataFilter(result));
+        .catch( (error) => {
+          console.log(error.message);
         });
     }
 }

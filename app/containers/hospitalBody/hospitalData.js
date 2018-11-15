@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 //import {bindActionCreators} from 'redux';
 import * as actionCreatores from '../../actions';
 import {connect} from 'react-redux';
-// Send Data To Show Filter Brands .
-import FilterBrands from './filterData/FilterBrands';
+
 
 class FilterData extends Component{
     componentDidMount(){                     
@@ -34,7 +33,9 @@ class FilterData extends Component{
                 <div className="container">
                     <div className="row">
                         <div className="col-md-3 Filter"> 
-                            {this.FilterBrandsFun()}                                                               
+                            {this.FilterBrandsFun()}
+                            {/* {this.props.data['login']} */}
+                            mohamed
                         </div>                       
                     </div>
                 </div>
@@ -48,4 +49,4 @@ function mapStateToProps(state){
         data: state.filterData
     };
 }
-export default connect(mapStateToProps,actionCreatores)(FilterData);
+export default connect(mapStateToProps, actionCreatores)(FilterData);
