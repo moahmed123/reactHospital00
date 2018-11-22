@@ -2,7 +2,7 @@ import React from 'react';
 // NavBar Data
 import NavBar from '../containers/NavBar';
 // Filter Data 
-import BodyData from '../containers/hospitalBody/hospitalData';
+import BodyData from '../containers/Body/bodyHospital';
 // Footer Data 
 import Footer from '../containers/Footer';
 
