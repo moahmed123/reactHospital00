@@ -22,3 +22,11 @@ export function ActionDataFilter(DataFilter){
         dataFilter: DataFilter
     }
 }
+// export function putedit(id,name){
+//     return(dispatch) => {
+//         return axios.put('https://apihospital00.herokuapp.com/api/put?id='+id+'&name='+name)        
+//         .catch( (error) => {
+//           console.log(error.message);
+//         });
+//     }
+// }
