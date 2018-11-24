@@ -60,7 +60,7 @@ class HospitalDataTable extends Component{
                     </div>
                     <div className='col-md-12 hidden'>
                         <p>{databrands['longitude']}</p>                    
-                        <p>{databrands['review'][0]['nameUser']}</p>                    
+                        {/* <p>{databrands['review'][0]['nameUser']}</p> */}
                         <p>{databrands['country']}</p>
                     </div>     
                     <div className='col-md-12'>                        

@@ -40,3 +40,23 @@ export function loadingDataTable(){
         dispatch(ActionAllData(null));
     }
 }
+
+export function InsertHospitalData(name,latitude,type,categories,country,city,longitude,activation,details){
+
+    const URL = 'https://apihospital00.herokuapp.com/api/addhospital?name='+ name +
+    '&latitude=' + latitude + '&type=' + type + '&categories='+ categories
+    +'&city='+ city +'&country='+ country +'&longitude='+ longitude +
+    '&activation='+ activation +'&details='+ details;
+
+    return(dispatch) => {
+        return axios.post(URL)       
+        .then((response) => {
+            console.log(response.data);            
+            dispatch(loadingDataTable());// To Display loading
+            dispatch(GetAllData());// To Reloading Data.
+        })
+        .catch( (error) => {         
+          console.log(error.message);
+        });
+    }
+} 
