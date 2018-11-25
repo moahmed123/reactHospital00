@@ -29,8 +29,7 @@ class InsertDataHospital extends Component{
         }
     }
     handleSubmit(event)  {
-        event.preventDefault()       
-        //event.target.elements.city.value  
+        event.preventDefault();
         const name       = event.target.elements.name.value,
               details    = event.target.elements.details.value,
               phone      = event.target.elements.phone.value, // not work in database
@@ -49,9 +48,7 @@ class InsertDataHospital extends Component{
                 const activation = false;
                 this.props.InsertHospitalData(name,latitude,type,categories,country,city,longitude,activation,details);
                 this.toggleForm();
-            }             
-              //InsertHospitalData(name,latitude,type,categories,country,city,longitude,activation,details)
-              
+            }                                         
     }        
     render(){          
         return(  

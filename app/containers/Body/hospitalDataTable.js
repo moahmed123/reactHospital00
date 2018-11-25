@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-// import {bindActionCreators} from 'redux';
 import * as actionCreatores from '../../actions';
 import {connect} from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class HospitalDataTable extends Component{
     constructor(props) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);                                    
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.deleteData = this.deleteData.bind(this);
+        //showFormEditData
+        this.showFormEditData = this.showFormEditData.bind(this);
         this.state = {            
-            loading: false
+            loading: false            
         };
     }
     componentDidMount(){                     
@@ -20,7 +23,7 @@ class HospitalDataTable extends Component{
 
     }    
     handleSubmit(event)  {
-        event.preventDefault()
+        event.preventDefault();
        // console.log(event.target[0].value)
         const idHospital  = event.target.elements.id.value,
         hospitalname = event.target.elements.hospitalname.value;
@@ -34,36 +37,58 @@ class HospitalDataTable extends Component{
         this.props.editHospitalData(idHospital,hospitalname);          
         // console.log(this.props.ReloadDataTable)
     }
+    deleteData(id){
+        event.preventDefault();
+        this.props.DeleteHospitalData(id);
+    }
+    // Function To Show And Hide Edit Form.
+    showFormEditData(e){                       
+        if(e.target.parentElement.parentElement.lastChild.previousSibling.className == 'hidden col-md-12 content-form'){
+            e.target.parentElement.parentElement.lastChild.previousSibling.className =  'show col-md-12 content-form';
+        }else{
+            e.target.parentElement.parentElement.lastChild.previousSibling.className =  'hidden col-md-12 content-form';
+        }
+    }
     // Fun Brands .
-    FilterBrandsFun(){
+    TableDataHospital(){
         if(!this.props.AllData || this.state.loading == false){
             return <div> Loading ... </div>;
         }        
         return this.props.AllData['hotels'].map((databrands, i)=>{            
             return(
                 <div key = {i} className='row'>
-                    <div className='col-md-3'>                         
-                        <h4>{databrands['name']}</h4>
-                    </div>
-                    <div className='col-md-3'> 
-                        <p>{databrands['details']}</p>
-                    </div>
-                    <div className='col-md-2'>
-                        <p>{databrands['city']}</p>
+                    <div className='col-md-2'> 
+                        <input 
+                            className='btn btn-success'
+                            value='edit' 
+                            type='submit'                            
+                            onClick={this.showFormEditData}/>
+                        <input  
+                            className='btn btn-danger' 
+                            value='del'
+                            type='submit'
+                            onClick = {()=> this.deleteData(databrands['_id'])}
+                            />
                     </div>
                     <div className='col-md-2'> 
                         <p>{databrands['phone']}</p> 
                     </div>
-                    <div className='col-md-2'> 
-                        <input className='btn btn-success' value='edit' type='submit'/>
-                        <input className='btn btn-danger' value='del' type='submit'/>
+                    <div className='col-md-2'>
+                        <p>{databrands['city']}</p>
                     </div>
+                    <div className='col-md-3'> 
+                        <p>{databrands['details']}</p>
+                    </div>
+                    <div className='col-md-3'>                         
+                        <h4>{databrands['name']}</h4>
+                    </div>
+
                     <div className='col-md-12 hidden'>
                         <p>{databrands['longitude']}</p>                    
                         {/* <p>{databrands['review'][0]['nameUser']}</p> */}
                         <p>{databrands['country']}</p>
                     </div>     
-                    <div className='col-md-12'>                        
+                    <div className='hidden col-md-12 content-form'>
                         <form onSubmit={this.handleSubmit} className='submit-from'>                                                        
                             <input type="text" name="hospitalname"/>
                             <input type="hidden" name="id" value ={databrands['_id']}/>
@@ -74,25 +99,31 @@ class HospitalDataTable extends Component{
                             <input  name='country' placeholder={databrands['country']} type='text'/>                             */}
                             <button type="submit">Submit</button>
                         </form>
-                    </div>                                   
+                    </div>                                                                                  
+                    <div>
+                         icon
+                    </div>
                 </div>
             );
         });
     }
     render(){          
         return(  
-            <section className="body-data">
+            <section className="table-data">
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-12 Filter"> 
-                        <div className='row'>
-                            <div className='col-md-3'> Hospital Name </div>
-                            <div className='col-md-3'> Address </div>
-                            <div className='col-md-2'> City </div>
-                            <div className='col-md-2'> Phone</div>
-                            <div className='col-md-2'> Edit / Delete</div>
-                        </div>
-                            {this.FilterBrandsFun()}                          
+                        <div className="col-md-12"> 
+                            <div className='row static-data'>
+                                <div className='col-md-2'> تعديل / حذف</div>
+                                <div className='col-md-2'> التليفون </div>
+                                <div className='col-md-2'> المدينه </div>
+                                <div className='col-md-3'> العنوان </div>
+                                <div className='col-md-3'> اسم المستشفي </div>
+                            </div>
+                            <div>
+                                {this.TableDataHospital()}
+                            </div>
+                            
                         </div>     
                     </div>
                 </div>

@@ -40,9 +40,8 @@ export function loadingDataTable(){
         dispatch(ActionAllData(null));
     }
 }
-
+// Insert Data For Database
 export function InsertHospitalData(name,latitude,type,categories,country,city,longitude,activation,details){
-
     const URL = 'https://apihospital00.herokuapp.com/api/addhospital?name='+ name +
     '&latitude=' + latitude + '&type=' + type + '&categories='+ categories
     +'&city='+ city +'&country='+ country +'&longitude='+ longitude +
@@ -60,3 +59,17 @@ export function InsertHospitalData(name,latitude,type,categories,country,city,lo
         });
     }
 } 
+// Delete Data From Data Base 
+export function DeleteHospitalData(id){
+    return(dispatch) => {
+        return axios.delete('https://apihospital00.herokuapp.com/api/delete?id='+id)       
+        .then((response) => {
+            console.log(response.data);            
+            //dispatch(loadingDataTable());// To Display loading
+            dispatch(GetAllData());// To Reloading Data.
+        })
+        .catch( (error) => {         
+          console.log(error.message);
+        });
+    }
+}
