@@ -21,9 +21,15 @@ export function ActionAllData(HospitalData){
     }
 }
 // Function Update Data 
-export function editHospitalData(id,name){
+
+export function editHospitalData(id,name,latitude,type,categories,country,city,longitude,activation,details,phone){
+    const URL = 'https://apihospital00.herokuapp.com/api/put?id='+id+'&name='+ name +
+    '&latitude=' + latitude + '&type=' + type + '&categories='+ categories
+    +'&city='+ city +'&country='+ country +'&longitude='+ longitude +
+    '&activation='+ activation +'&details='+ details + '&phone='+ phone;
+
     return(dispatch) => {
-        return axios.put('https://apihospital00.herokuapp.com/api/put?id='+id+'&name='+name)       
+        return axios.put(URL)       
         .then((response) => {
             console.log(response.data);            
             dispatch(loadingDataTable());// To Display loading
@@ -41,11 +47,11 @@ export function loadingDataTable(){
     }
 }
 // Insert Data For Database
-export function InsertHospitalData(name,latitude,type,categories,country,city,longitude,activation,details){
+export function InsertHospitalData(name,latitude,type,categories,country,city,longitude,activation,details,phone){
     const URL = 'https://apihospital00.herokuapp.com/api/addhospital?name='+ name +
     '&latitude=' + latitude + '&type=' + type + '&categories='+ categories
     +'&city='+ city +'&country='+ country +'&longitude='+ longitude +
-    '&activation='+ activation +'&details='+ details;
+    '&activation='+ activation +'&details='+ details+ '&phone=' + phone;
 
     return(dispatch) => {
         return axios.post(URL)       

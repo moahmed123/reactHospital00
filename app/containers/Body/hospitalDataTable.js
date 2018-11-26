@@ -3,11 +3,10 @@ import * as actionCreatores from '../../actions';
 import {connect} from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
 class HospitalDataTable extends Component{
     constructor(props) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.updateData = this.updateData.bind(this);
         this.deleteData = this.deleteData.bind(this);
         //showFormEditData
         this.showFormEditData = this.showFormEditData.bind(this);
@@ -20,34 +19,47 @@ class HospitalDataTable extends Component{
         this.setState({
             loading: true
         });
-
     }    
-    handleSubmit(event)  {
-        event.preventDefault();
-       // console.log(event.target[0].value)
-        const idHospital  = event.target.elements.id.value,
-        hospitalname = event.target.elements.hospitalname.value;
-        console.log(event.target.elements.hospitalname.value);
-        console.log(event.target.elements.id.value);
-        // console.log(event.target.elements.city.value)
-        // console.log(event.target.elements.phone.value)
-        // console.log(event.target.elements.longitude.value)
-        // console.log(event.target.elements.country.value)                
-        // console.log(this.inputNode.value)                             
-        this.props.editHospitalData(idHospital,hospitalname);          
-        // console.log(this.props.ReloadDataTable)
-    }
+   
+    // Function To Delete Data Hospital . 
     deleteData(id){
         event.preventDefault();
         this.props.DeleteHospitalData(id);
     }
-    // Function To Show And Hide Edit Form.
+    // Function To Show And Hide Edit Form .
     showFormEditData(e){                       
         if(e.target.parentElement.parentElement.lastChild.previousSibling.className == 'hidden col-md-12 content-form'){
             e.target.parentElement.parentElement.lastChild.previousSibling.className =  'show col-md-12 content-form';
         }else{
             e.target.parentElement.parentElement.lastChild.previousSibling.className =  'hidden col-md-12 content-form';
         }
+    }
+    updateData(event)  {
+        event.preventDefault();       
+        const hospitalId         = event.target.elements.id.value,
+              hospitalname       = event.target.elements.hospitalname.value,
+              hospitaldetails    = event.target.elements.details.value,
+              hospitalphone      = event.target.elements.phone.value,
+              hospitalcity       = event.target.elements.city.value,
+              hospitaltype       = event.target.elements.type.value,
+              hospitallatitude   = event.target.elements.latitude.value,
+              hospitalcategories = event.target.elements.categories.value,
+              hospitallongitude  = event.target.elements.longitude.value,
+              hospitalactivation = event.target.elements.activation.value,
+              hospitalcountry    = event.target.elements.country.value;
+
+        this.props.editHospitalData(
+            hospitalId,
+            hospitalname,
+            hospitallatitude,
+            hospitaltype,
+            hospitalcategories,
+            hospitalcountry,
+            hospitalcity,
+            hospitallongitude,
+            hospitalactivation,
+            hospitaldetails,
+            hospitalphone);
     }
     // Fun Brands .
     TableDataHospital(){
@@ -56,16 +68,16 @@ class HospitalDataTable extends Component{
         }        
         return this.props.AllData['hotels'].map((databrands, i)=>{            
             return(
-                <div key = {i} className='row'>
+                <div key = {i} className='row table-show'>
                     <div className='col-md-2'> 
                         <input 
                             className='btn btn-success'
-                            value='edit' 
+                            value='تعديل' 
                             type='submit'                            
                             onClick={this.showFormEditData}/>
                         <input  
                             className='btn btn-danger' 
-                            value='del'
+                            value='حذف'
                             type='submit'
                             onClick = {()=> this.deleteData(databrands['_id'])}
                             />
@@ -82,26 +94,30 @@ class HospitalDataTable extends Component{
                     <div className='col-md-3'>                         
                         <h4>{databrands['name']}</h4>
                     </div>
-
                     <div className='col-md-12 hidden'>
                         <p>{databrands['longitude']}</p>                    
                         {/* <p>{databrands['review'][0]['nameUser']}</p> */}
                         <p>{databrands['country']}</p>
                     </div>     
                     <div className='hidden col-md-12 content-form'>
-                        <form onSubmit={this.handleSubmit} className='submit-from'>                                                        
-                            <input type="text" name="hospitalname"/>
+                        <form onSubmit={this.updateData} className='submit-from'>                                                                                    
                             <input type="hidden" name="id" value ={databrands['_id']}/>
-                            {/* <input  name='details' placeholder={databrands['details']} type='text'/>
-                            <input  name='phone' placeholder={databrands['phone']} type='text'/>
-                            <input  name='city' placeholder= {databrands['city']} type='text'/>
-                            <input  name='longitude' placeholder={databrands['longitude']} type='text'/>
-                            <input  name='country' placeholder={databrands['country']} type='text'/>                             */}
-                            <button type="submit">Submit</button>
+                            <input type="hidden" name="oldactivation" value ={databrands['activation']}/>
+                            <input type="text" name="hospitalname" defaultValue= {databrands['name']}/>
+                            <textarea  name='details' placeholder={databrands['details']} defaultValue= {databrands['details']}></textarea>
+                            <input  name='phone' placeholder={databrands['phone']} type='text' defaultValue= {databrands['phone']}/>
+                            <input  name='city' placeholder= {databrands['city']} type='text' defaultValue= {databrands['city']}/>
+                            <input  name='type' placeholder= {databrands['type']} type='text' defaultValue= {databrands['type']}/>
+                            <input  name='latitude' placeholder={databrands['latitude']} type='text' defaultValue= {databrands['latitude']}/>
+                            <input  name='longitude' placeholder={databrands['longitude']} type='text' defaultValue= {databrands['longitude']}/>
+                            <input type="text" name="activation" defaultValue= {databrands['activation']}/>
+                            <input  name='country' placeholder={databrands['country']} type='text' defaultValue = {databrands['country']}/>
+                            <input  name='categories' placeholder={databrands['categories']} type='text' defaultValue= {databrands['categories']}/>
+                            <button type="submit">تعديل</button>
                         </form>
                     </div>                                                                                  
-                    <div>
-                         icon
+                    <div className='col-md-12 text-center'>
+                        <FontAwesomeIcon icon="angle-down" />                                            
                     </div>
                 </div>
             );
@@ -120,10 +136,9 @@ class HospitalDataTable extends Component{
                                 <div className='col-md-3'> العنوان </div>
                                 <div className='col-md-3'> اسم المستشفي </div>
                             </div>
-                            <div>
+                            <div className='data-table'>
                                 {this.TableDataHospital()}
-                            </div>
-                            
+                            </div>                        
                         </div>     
                     </div>
                 </div>
@@ -131,7 +146,6 @@ class HospitalDataTable extends Component{
         );
     }
 }
-
 function mapStateToProps(state){
     return{
         AllData: state.AllDataHospital        

@@ -24,8 +24,21 @@ body{
     border: 1px solid #ddd
 }
 .table-data .static-data div{
-    padding-right: 1px solid #ddd
+    border-right: 1px solid #ddd
 }
+.table-data .static-data div:last-of-type{
+    border-right:none
+}
+.table-data .data-table{
+    padding: 0 ;
+}
+.table-data .table-show{
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 10px 0;
+}
+/* Start Table Data  */
 /************************
    End contact
 ************************/

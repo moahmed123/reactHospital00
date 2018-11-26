@@ -7,11 +7,10 @@ import BodyData from '../containers/Body/bodyHospital';
 import Footer from '../containers/Footer';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faAngleDown } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faStroopwafel, faAtom, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
-
-library.add(faAngleDown);
+library.add(faStroopwafel, faAtom, faAngleDown);
 
 const App = () => {
     return(

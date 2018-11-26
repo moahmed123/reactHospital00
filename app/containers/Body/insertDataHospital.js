@@ -42,11 +42,21 @@ class InsertDataHospital extends Component{
             
             if (document.getElementById("activeData").checked == true){
                 const activation = true;
-                this.props.InsertHospitalData(name,latitude,type,categories,country,city,longitude,activation,details);
+                this.props.InsertHospitalData(name,latitude,type,categories,country,city,longitude,activation,details,phone);
                 this.toggleForm();
             }else{
                 const activation = false;
-                this.props.InsertHospitalData(name,latitude,type,categories,country,city,longitude,activation,details);
+                this.props.InsertHospitalData(
+                    name,
+                    latitude,
+                    type,
+                    categories,
+                    country,
+                    city,
+                    longitude,
+                    activation,
+                    details,
+                    phone);
                 this.toggleForm();
             }                                         
     }        
@@ -61,7 +71,7 @@ class InsertDataHospital extends Component{
                                 value ='Insert Hospital' 
                                 className='btn btn-info'
                                 onClick = {this.toggleForm}
-                                />
+                            />
                     </div>
                     <div className={this.state.toggleForm} id='form-to-insert'>
                             <h2> Form To Insert </h2>
