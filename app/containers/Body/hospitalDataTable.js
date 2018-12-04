@@ -20,7 +20,6 @@ class HospitalDataTable extends Component{
             loading: true
         });
     }    
-   
     // Function To Delete Data Hospital . 
     deleteData(id){
         event.preventDefault();
@@ -61,7 +60,14 @@ class HospitalDataTable extends Component{
             hospitaldetails,
             hospitalphone);
     }
-    // Fun Brands .
+    showMoreData(ee){
+        if( ee.target.parentElement.previousSibling.previousSibling.className == "col-md-12 hidden more-data"){
+            ee.target.parentElement.previousSibling.previousSibling.className = "col-md-12 more-data"
+        }else{
+            ee.target.parentElement.previousSibling.previousSibling.className = "col-md-12 hidden more-data"
+        }        
+    }
+    // Fun Show All Data Table .
     TableDataHospital(){
         if(!this.props.AllData || this.state.loading == false){
             return <div> Loading ... </div>;
@@ -94,8 +100,9 @@ class HospitalDataTable extends Component{
                     <div className='col-md-3'>                         
                         <h4>{databrands['name']}</h4>
                     </div>
-                    <div className='col-md-12 hidden'>
-                        <p>{databrands['longitude']}</p>                    
+                    <div className='col-md-12 hidden more-data'>
+                        <p>longitude : {databrands['loc']['coordinates'][0]}</p>
+                        <p>latitude  : {databrands['loc']['coordinates'][1]}</p>
                         {/* <p>{databrands['review'][0]['nameUser']}</p> */}
                         <p>{databrands['country']}</p>
                     </div>     
@@ -117,7 +124,7 @@ class HospitalDataTable extends Component{
                         </form>
                     </div>                                                                                  
                     <div className='col-md-12 text-center'>
-                        <FontAwesomeIcon icon="angle-down" />                                            
+                        <FontAwesomeIcon icon="angle-down" onClick ={this.showMoreData} />                                            
                     </div>
                 </div>
             );
