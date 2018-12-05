@@ -39,6 +39,30 @@ body{
     padding: 10px 0;
 }
 /* Start Table Data  */
+/* pupops of Delete  */
+.display-inherit{
+    position: inherit;
+}
+.verified-delete{
+    position: fixed;    
+    margin: 0 24%;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    top: 30%;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+
+}
+.table-box{
+    display: table;
+    width: 100%
+}
+.table-cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+/* pupops of Delete  */
 /************************
    End contact
 ************************/

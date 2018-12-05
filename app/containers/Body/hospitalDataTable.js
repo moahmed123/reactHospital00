@@ -21,8 +21,24 @@ class HospitalDataTable extends Component{
         });
     }    
     // Function To Delete Data Hospital . 
+    verifiedDelete(eve){                   
+        if(eve.target.nextSibling.className == 'verified-delete hidden'){
+            eve.target.nextSibling.className =  'verified-delete';
+        }else{
+            eve.target.nextSibling.className =  'verified-delete hidden';
+        }
+    }
+    cancelDelete(ev){   
+        ev.preventDefault();    
+        
+        if(ev.target.parentElement.parentElement.parentElement.className == 'verified-delete hidden'){
+            ev.target.parentElement.parentElement.parentElement.className =  'verified-delete';
+        }else{
+            ev.target.parentElement.parentElement.parentElement.className =  'verified-delete hidden';
+        }
+    }
     deleteData(id){
-        event.preventDefault();
+      //  event.preventDefault();
         this.props.DeleteHospitalData(id);
     }
     // Function To Show And Hide Edit Form .
@@ -60,11 +76,11 @@ class HospitalDataTable extends Component{
             hospitaldetails,
             hospitalphone);
     }
-    showMoreData(ee){
-        if( ee.target.parentElement.previousSibling.previousSibling.className == "col-md-12 hidden more-data"){
-            ee.target.parentElement.previousSibling.previousSibling.className = "col-md-12 more-data"
+    showMoreData(e){
+        if( e.target.parentElement.previousSibling.previousSibling.className == "col-md-12 hidden more-data"){
+            e.target.parentElement.previousSibling.previousSibling.className = "col-md-12 more-data"
         }else{
-            ee.target.parentElement.previousSibling.previousSibling.className = "col-md-12 hidden more-data"
+            e.target.parentElement.previousSibling.previousSibling.className = "col-md-12 hidden more-data"
         }        
     }
     // Fun Show All Data Table .
@@ -74,8 +90,8 @@ class HospitalDataTable extends Component{
         }        
         return this.props.AllData['hotels'].map((databrands, i)=>{            
             return(
-                <div key = {i} className='row table-show'>
-                    <div className='col-md-2'> 
+                <div key = {i} className='row table-show display-inherit '>                
+                    <div className='col-md-2 display-inherit'> 
                         <input 
                             className='btn btn-success'
                             value='تعديل' 
@@ -85,8 +101,29 @@ class HospitalDataTable extends Component{
                             className='btn btn-danger' 
                             value='حذف'
                             type='submit'
-                            onClick = {()=> this.deleteData(databrands['_id'])}
+                            onClick = {this.verifiedDelete}
                             />
+                            <div className='verified-delete hidden'>
+                                <div className='table-box'>
+                                    <div className='table-cell'>
+                                        <div className='text-center'>
+                                            <h4>you can sure for delete : {databrands['name']}</h4>
+                                        </div>
+                                        <input  
+                                            className='btn btn-danger' 
+                                            value='حذف'
+                                            type='submit'
+                                            onClick = {()=> this.deleteData(databrands['_id'])}
+                                            />
+                                        <input  
+                                            className='btn btn-primary' 
+                                            value='cancel'
+                                            type='submit'                 
+                                            onClick = {this.cancelDelete}
+                                            />
+                                    </div>
+                                </div>                                
+                            </div>
                     </div>
                     <div className='col-md-2'> 
                         <p>{databrands['phone']}</p> 
@@ -124,7 +161,7 @@ class HospitalDataTable extends Component{
                         </form>
                     </div>                                                                                  
                     <div className='col-md-12 text-center'>
-                        <FontAwesomeIcon icon="angle-down" onClick ={this.showMoreData} />                                            
+                        <FontAwesomeIcon icon="angle-down" onClick ={this.showMoreData} size= "2x" />                                            
                     </div>
                 </div>
             );
