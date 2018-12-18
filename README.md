@@ -16,13 +16,16 @@ start npm
 open http://localhost:8080
 ```
 #replace  
+```bash
 "start": "react-scripts start",
 "build": "react-scripts build",
 "test": "react-scripts test --env=jsdom",
 "eject": "react-scripts eject"
-
+```
 #to 
+```bash
 "start": "webpack-dev-server --hot"
+```
 
 [React]: http://facebook.github.io/react/
 [webpack]: http://webpack.github.io/
