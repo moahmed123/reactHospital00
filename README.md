@@ -15,9 +15,15 @@ cd react-example
 start npm 
 open http://localhost:8080
 ```
+#replace  
+"start": "react-scripts start",
+"build": "react-scripts build",
+"test": "react-scripts test --env=jsdom",
+"eject": "react-scripts eject"
+
+#to 
+"start": "webpack-dev-server --hot"
 
 [React]: http://facebook.github.io/react/
 [webpack]: http://webpack.github.io/
 [babeljs]: https://babeljs.io/
-# reactHospital00
-# reactHospital00
