@@ -3,15 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "private": true,
+  "homepage": "http://moahmed123.github.io/reacthospital00",
   "engines": {
     "npm": "6.4.1",
     "node": "8.11.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
   },
   "author": "mohamedalaa",
   "license": "ISC",
@@ -47,5 +42,13 @@
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.3"
   },
-  "description": ""
+  "description": "",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build" 
+  }
 }
